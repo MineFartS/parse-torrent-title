@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from . import re
+import re
 from .extras import exceptions, genres, langs, link_patterns, patterns_ignore_title
 from .patterns import delimiters, patterns, patterns_ordered, types, patterns_allow_overlap
 from .post import post_processing_after_excess, post_processing_before_excess
