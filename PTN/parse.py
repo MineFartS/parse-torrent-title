@@ -79,8 +79,6 @@ class PTN(object):
                 # For 'year', we instead use the last instance of a year match since,
                 # if a title includes a year, we don't want to use this for the year field.
                 match_index = 0
-                if key == "year":
-                    match_index = -1
 
                 match = matches[match_index]["match"]
                 match_start, match_end = (
@@ -99,6 +97,8 @@ class PTN(object):
                     clean = self.get_season_episode(match)
                 elif key == "subtitles":
                     clean = self.get_subtitles(match)
+                elif key == "year":
+                    clean = self.get_year(match)
                 elif key in ("language", "genre"):
                     clean = self.split_multi(match)
                 elif key in types.keys() and types[key] == "boolean":
@@ -239,6 +239,15 @@ class PTN(object):
             clean = int(m[0])
 
         return clean
+    
+    @staticmethod
+    def get_year(m):
+        
+        if len(m) > 1:
+            return list(range(int(m[0]), int(m[-1]) + 1))
+        
+        elif m:
+            return int(m[0])
 
     @staticmethod
     def split_multi(match):
