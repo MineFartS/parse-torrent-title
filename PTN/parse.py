@@ -97,8 +97,6 @@ class PTN(object):
                     clean = self.get_season_episode(match)
                 elif key == "subtitles":
                     clean = self.get_subtitles(match)
-                elif key == "year":
-                    clean = self.get_year(match)
                 elif key in ("language", "genre"):
                     clean = self.split_multi(match)
                 elif key in types.keys() and types[key] == "boolean":
@@ -139,6 +137,8 @@ class PTN(object):
 
         for f in post_processing_after_excess:
             f(self)
+
+        self.parts['year'] = self.get_year(name)
 
         return self.parts
 
@@ -241,7 +241,12 @@ class PTN(object):
         return clean
     
     @staticmethod
-    def get_year(m):
+    def get_year(name:str):
+
+        m = re.findall(
+            pattern = "(?:19[0-9]|20[0-2])[0-9]",
+            string = name 
+        )
         
         if len(m) > 1:
             return list(range(int(m[0]), int(m[-1]) + 1))
