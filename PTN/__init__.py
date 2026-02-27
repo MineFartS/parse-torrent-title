@@ -4,7 +4,7 @@ from .parse import PTN
 
 __author__ = "Giorgio Momigliano"
 __email__ = "gmomigliano@protonmail.com"
-__version__ = "2.8.1"
+__version__ = "3.1"
 __license__ = "MIT"
 
 
